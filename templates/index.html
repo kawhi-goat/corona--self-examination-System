@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>home</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_1.css') }}">
+</head>
+<body style="overflow:hidden;">
+<div class="title">무인 문진 검사</div>
+<div class="wrapper">
+<div class="button_base foreignButton">
+    <div>외국인</div>
+</div>
+<div class="button_base nativeButton" onClick="location.href='/2'">
+    <div>내국인</div>
+</div>
+</div>
+</body>
+</html>

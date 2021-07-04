@@ -1,0 +1,80 @@
+body{
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+}
+
+.title{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width : 100%;
+        text-align: center;
+        font-size: 36px;
+}
+
+.line{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width:100%;
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+}
+
+.announce{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width:100%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+}
+
+.select{
+        width: 600px;
+        height: 100px;
+        margin:0 auto;
+}
+table{
+        position: relative;
+        width: 900px;
+        border: 1px solid #444444;
+        widows: 100px;
+        margin:0 auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+}
+.td{
+        border: 1px solid #444444;
+        padding: 5px;
+}
+
+.input{
+        position: relative;
+        width : 500px;
+        height: 100px;
+        margin:0 auto;
+}
+
+#nextTrigger{
+        position: relative;
+        margin:0 auto;
+    	display:block;
+        border: 2px so
+        lid black;
+        background-color :  white;
+        border-color: #e7e7e7;
+        color : black;
+        text-align: center;
+        width: 150px;
+        height: 50px;
+        text-align: center;
+        box-sizing: border-box;
+        font-size :  20px;
+        cursor :  default;
+}
+#nextTrigger:hover{
+        background: #e7e7e7;
+}

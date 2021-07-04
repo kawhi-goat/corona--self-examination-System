@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_4.css') }}">
+
+</head>
+
+<body>
+    <form action="ask_receiver" method="post" id="form1" name="form1">
+        <div class="title">건강상태 전자문진 </div>
+
+        <div class="line">최근 21일 내에 방문한 국가를 모두 적어주세요 :</div>
+        <tr>
+            <div class="select">
+                국가1 &nbsp;
+                <select con1="degree" name="country">
+                    <option value="0">선택</option>
+                    <option value="1">일본</option>
+                    <option value="2">중국</option>
+                    <option value="3">영국</option>
+                    <option value="4">프랑스</option>
+                    <option value="5">독일</option>
+                    <option value="6">이탈리아</option>
+                    <option value="7">스페인</option>
+                    <option value="8">미국</option>
+                </select> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                국가2 &nbsp;
+                <select con1="degree" name="country">
+                    <option value="0">선택</option>
+                    <option value="1">일본</option>
+                    <option value="2">중국</option>
+                    <option value="3">영국</option>
+                    <option value="4">프랑스</option>
+                    <option value="5">독일</option>
+                    <option value="6">이탈리아</option>
+                    <option value="7">스페인</option>
+                    <option value="8">미국</option>
+                </select> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                국가3 &nbsp;
+                <select con1="degree" name="country">
+                    <option value="0">선택</option>
+                    <option value="1">일본</option>
+                    <option value="2">중국</option>
+                    <option value="3">영국</option>
+                    <option value="4">프랑스</option>
+                    <option value="5">독일</option>
+                    <option value="6">이탈리아</option>
+                    <option value="7">스페인</option>
+                    <option value="8">미국</option>
+                </select>
+        </tr>
+        </div>
+        <div class="line">최근 21일 동안에 아래 증상이 있었거나 현재 있는 경우 해당란에 체크해 주십시오.</div>
+        <table>
+            <thead>
+                <tr>
+                    <td> <input type="checkbox" name="symptom" value="10" />발열 </td>
+                    <td> <input type="checkbox" name="symptom" value="5" />오한 </td>
+                    <td> <input type="checkbox" name="symptom" value="2" />두통 </td>
+                    <td> <input type="checkbox" name="symptom" value="4" />인후통 </td>
+                    <td> <input type="checkbox" name="symptom" value="4" />콧물 </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> <input type="checkbox" name="symptom" value="5" />호흡곤란 </td>
+                    <td> <input type="checkbox" name="symptom" value="9" />기침 </td>
+                    <td> <input type="checkbox" name="symptom" value="1" />구토 </td>
+                    <td> <input type="checkbox" name="symptom" value="1" />발진 </td>
+                    <td> <input type="checkbox" name="symptom" value="2" />복통 혹은 설사 </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td> <input type="checkbox" name="symptom" value="2" />근육통 </td>
+                    <td> <input type="checkbox" name="symptom" value="5" />의식저하 </td>
+                    <td> <input type="checkbox" name="symptom" value="1" />황달 </td>
+                    <td> <input type="checkbox" name="symptom" value="2" />점막 지속 출혈 </td>
+                    <td> <input type="checkbox" name="symptom" value="4" />그 밖의 증상 <textarea rows="1"
+                            cols="10"></textarea> </td>
+                </tr>
+            </tfoot>
+            </div>
+        </table>
+        <br>
+
+        <div class="line">아래에 해당하는 행동을 했을 경우에는 해당란에 체크해 주십시오.</div>
+        <div class="input">
+            <input type="checkbox" name="choice" value="A" />현지 병원 방문 &nbsp; &nbsp; &nbsp;
+            <input type="checkbox" name="choice" value="B" />증상 관련 약 복용 &nbsp; &nbsp; &nbsp;
+            <input type="checkbox" name="choice" value="C" />동물 접촉 &nbsp; &nbsp; &nbsp;
+        </div>
+        <div class="announce">
+            건강상태 질문서 작성을 기피하거나 거짓으로 작성하여 제출하는 경우 <br>
+            『검역법』 제12조 및 제39조에 따라 1년 이하의 징역 또는 1천만원 이하의 벌금에 처해질 수 있습니다.
+            <br>
+            <br>
+            위의 주의사항을 확인하였으며, 모든 답변 내용이 사실임을 확인합니다. <input type="checkbox" id="agreement">
+            <br>
+        </div>
+        <br><br>
+
+        <button type="submit" id="nextTrigger">다음</button>
+    </form>
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+    <script type="text/javascript" src="{{url_for('static', filename='script/jquery-3.5.1.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='script/4.js')}}"></script>
+    <script type="text/javascript">
+        $(function () {
+            function doWork() {
+                var v2 = 0;
+                var v8 = "";
+
+                for (var i = 0; i < 3; i++) {
+                    v8 += document.getElementsByName("country")[i].value;
+                    v2 += parseInt(document.getElementsByName("country")[i].value);
+                }
+                if (v2 == 0) {
+                    alert("국가를 1개 이상 선택해주세요.");
+                    return;
+                }
+
+                var check_count = document.getElementsByName("symptom").length;
+                var v = 0;
+
+                for (var i = 0; i < check_count; i++) {
+                    if (document.getElementsByName("symptom")[i].checked == true) {
+                        v += parseInt(document.getElementsByName("symptom")[i].value);
+                    }
+                }
+
+                if ($("input:checkbox[id='agreement']").is(":checked") == false) {
+                    alert("주의사항을 확인하고 체크해주세요.");
+                    return;
+                }
+
+                $.post({
+                    url: "/ask_receiver",
+                    data: JSON.stringify({ country: v8, symptom: v }),
+                    contentType: "application/json",
+                    success: function (response) {
+                        location.href = "/5";;
+                    }
+                });
+            }
+
+            $('#nextTrigger').click(function (e) {
+                e.preventDefault();
+                doWork();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

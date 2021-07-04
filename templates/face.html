@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>recognize</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_2.css') }}">
+
+</head>
+
+<body>
+    <!--Camera-->
+    <main id="camera">
+        <!--Camera Sensor-->    
+        <canvas id="camera--sensor"></canvas>
+        <!--Camera View-->
+        <video id="camera--view" autoplay playsinline></video>
+        <!--Camera Output-->
+        <div class='cameraOutput'><img src="//:0" alt="" id="camera--output">
+        <!--Camera Trigger-->
+        <form action="receiver" method="post" id="form1" name="form1">
+            <img src="//:0" alt="" onError="this.src='./static/img/passport_form_2.png'" id="preview" name="img1">
+
+            <button type="submit" name="submitButton1" id="camera--trigger">사진 인식</button>
+        </form>
+        </div>
+    </main>
+
+<script type="text/javascript" src="{{url_for('static', filename='script/jquery-3.5.1.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='script/2.js')}}"></script>
+<script type="text/javascript">
+     $(function() {
+        function doWork() {
+            var response = $('#preview').attr('src');
+            console.log(response);
+            $.post({url: "/receiver", 
+                data: JSON.stringify({url : response}),
+                contentType: "application/json",
+                success: function(response){
+                    if(response.name.toString() == "error" || response.sex.toString() == "error" 
+                    || response.num.toString() == "error" || response.date.toString() == "error")
+                    {
+                        alert("다시 인식시켜주세요.")
+                    }
+                    else
+                    {
+                        if(confirm(response.name.toString() + "님 (" + response.num.toString() + "," + response.sex.toString() + ")이 맞는지 확인해주세요.") == true)
+                        {
+                            location.href='/3';
+                        }
+                        else{
+                            return;
+                        }
+                    }
+                    //$(".result").html('<p>이름 : '+response.name.toString()+'</p>'
+                    //    +'<p>성별 : '+response.sex.toString()+'</p>'
+                    //    +'<p>여권번호 : '+response.num.toString()+'</p>');
+                }});
+        }
+
+        $('#camera--trigger').click(function(e) {
+            e.preventDefault();
+            doWork();
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>check temperature</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_3.css') }}">
+
+</head>
+
+<body>
+    <div class = "title">체온 측정</div>
+    <div class="line">
+        <br>1) 체온계를 이마에 가까이 댄 후, 체온 측정 버튼을 클릭하십시오.
+        <br>2) 체온계를 피부에 완전히 붙이지 마십시오
+        <br>
+        <!--1) 정상 체온(35.5~37.5도)이 아닐 시, 추가검진 필요-->
+    </div>
+    <form action="/receiver" method="POST">
+        <div class="button">
+             <button type="submit" name="submitButton1" id="submitButton1">체온 측정</button>
+        </div>
+    </form>
+
+<script type="text/javascript" src="{{url_for('static', filename='script/jquery-3.5.1.js')}}"> </script>
+<script type="text/javascript">
+    $(function () {
+        function doWork() {
+            $.post({
+                url: "/arduino_receiver",
+                success: function (response) {
+                    a = parseFloat(response.temp);
+                if(a<30.0 || a>45.0){
+                    alert("체온을 다시 측정하십시오");
+                    }
+                else{
+                    location.href = "/4";
+                }
+                }
+            });
+        }
+        $('#submitButton1').click(function (e) {
+            e.preventDefault();
+            doWork();
+        });
+        
+    });
+</script>  
+
+</body>
+</html>
